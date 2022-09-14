@@ -34,7 +34,22 @@ class Language {
     "Old password":"Old password",
     "New password":"New password",
     "Confirm the password":"Confirm the password",
-    "Edit account":"Edit account"
+    "Edit account":"Edit account",
+    "Notifications":"Notifications",
+    "You don't have any notifications":"You don't have any notifications",
+    "Reports":"Reports",
+    "weekly":"weekly",
+    "Tasks":"Tasks",
+    "Categories":"Categories",
+    "Balance Transfer":"Balance Transfer",
+    "Telephone number":"Telephone number",
+   "Device Filling":"Device Filling",
+    "PIN Number":"PIN Number",
+    "Send":"Send",
+    "Password changed successfully":"Password changed successfully",
+    "Do not give your password to anyone to protect your information":"Do not give your password to anyone to protect your information",
+    "Succeeded":"Succeeded",
+    "Entertainment":"Entertainment"
   };
   final ArWords = {
     "Recent transactions": "المعاملات الاخيره",
@@ -69,7 +84,23 @@ class Language {
     "Old password":" الباسورد القديم",
     "New password":"كلمة السر الجديدة",
     "Confirm the password":"قم بتأكيد كلمة المرور",
-    "Edit account":"تعديل الحساب"
+    "Edit account":"تعديل الحساب",
+    "Notifications":"الاشعارات",
+    "You don't have any notifications":"لاتوجد اشعارات لديك",
+    "Reports":"التقارير",
+    "weekly":"الاسبوعية",
+     "Tasks":"مهام",
+    "Categories":"فئات",
+    "Balance Transfer":"تحويل الرصيد",
+    "Telephone number":"رقم الهاتف",
+    "Device Filling":"تعبئة الجهاز",
+    "PIN Number":"الرقم السري",
+    "Send":"ارسال",
+    "Password changed successfully":"تم تغيير الرقم السري بنجاح",
+    "Do not give your password to anyone to protect your information":"لا تعطِ كلمة مرورك لأي شخص لحماية معلوماتك",
+    "Succeeded":"نجح",
+    "Entertainment":"وسائل الترفيه"
+
   };
   final storage = GetStorage();
 

@@ -1,6 +1,10 @@
 import 'dart:ui';
 
 import 'package:alaimtidad/Constants/size.dart';
+import 'package:alaimtidad/Screens/balance_transfer.dart';
+import 'package:alaimtidad/Screens/bottomNavigationBar.dart';
+import 'package:alaimtidad/Screens/reports.dart';
+import 'package:alaimtidad/Screens/tasks.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,6 +13,9 @@ import 'package:provider/provider.dart';
 import '../Constants/language.dart';
 import '../Constants/theme.dart';
 import '../Providers/Home_provider.dart';
+import 'categories.dart';
+import 'device_filling.dart';
+import 'entertainment.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +25,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   @override
   Widget build(BuildContext context) {
     var size = mediaQuery(context);
@@ -94,16 +102,24 @@ class _HomeState extends State<Home> {
                         SizedBox(
                           width: size.getWidth() * 31,
                         ),
-                        Container(
-                          width: size.getWidth() * 10,
-                          height: size.getHeight() * 5,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Color(theme.getColor("arrow_forward_ios_rounded")),
-                            borderRadius: BorderRadius.circular(size.getWidth()*5),
+                        InkWell(
+                          onTap: (){
+                            setState(() {
 
+                              bottomNavigationBarIndex= 2;
+                            });
+                          },
+                          child: Container(
+                            width: size.getWidth() * 10,
+                            height: size.getWidth() * 10,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Color(theme.getColor("arrow_forward_ios_rounded")),
+                              borderRadius: BorderRadius.circular(size.getWidth()*5),
+
+                            ),
+                            child:  Icon(Icons.arrow_forward_ios_rounded,color: Color(theme.getColor("iconsColor")),),
                           ),
-                          child:  Icon(Icons.arrow_forward_ios_rounded,color: Color(theme.getColor("iconsColor")),),
                         ),
                       ],
                     ),
@@ -130,7 +146,7 @@ class _HomeState extends State<Home> {
                               borderRadius:
                                   BorderRadius.circular(size.getHeight() * 2),
                               child: Image.network(
-                                "https://media-exp1.licdn.com/dms/image/C5609AQFiZwbE2r33SQ/company-featured_1128_635/0/1529503144539?e=2147483647&v=beta&t=HC9Q0DGqS9NNkhsRwJXWmBczlCcWqXJHHSIeWvwcJks",
+                                "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
                                 //width: 500,
                                 fit:BoxFit.cover,
                               ),
@@ -157,17 +173,59 @@ class _HomeState extends State<Home> {
                       SizedBox(
                         width: size.getWidth() * 73,
                       ),
-                       Expanded(child: Text(language.GetWord("More"), style: TextStyle(color: Color(theme.getColor("iconsColor")),))),
+                      InkWell(
+                         onTap: () {
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(builder: (context) =>  tasks()),
+                           );
+                         },
+                          child: Expanded(
+                              child: Text(language.GetWord("More"),
+                                  style: TextStyle(
+                                    color: Color(theme.getColor("iconsColor")),
+                                  )))),
                     ],
                   ),
+                  SizedBox(height: size.getHeight() * 2),
                   SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                     child: Row(children: [
                       for (var index = 0; index < value.Task.length; index++)
+                           InkWell(
+                             onTap: (){
 
-                          Task(value.Task[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor")),
+                               if(0==index){
+                                 Navigator.push(
+                                   context,
+                                   MaterialPageRoute(builder: (context) =>  categories()),
+                                 );
+                               }
+                               if(1==index){
+                                 Navigator.push(
+                                   context,
+                                   MaterialPageRoute(builder: (context) =>  reports()),
+                                 );
+                               }
+                               if(2==index){
+                                 Navigator.push(
+                                   context,
+                                   MaterialPageRoute(builder: (context) =>  balance_transfer()),
+                                 );
+                               }
+                               if(3==index){
+                                 Navigator.push(
+                                   context,
+                                   MaterialPageRoute(builder: (context) =>  device_filling()),
+                                 );
+                               }
+                             },
+                             child:language.language==1?Task(value.Task[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor")):Task(value.Task_en[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor")),
+                           ),
+
                         ]),
                   ),
+                  SizedBox(height: size.getHeight() * 2),
                   Row(
                     children: [
                       SizedBox(
@@ -184,19 +242,18 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   SizedBox(
-                    height: size.getHeight() * 1,
+                    height: size.getHeight() * 2,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(children: [
 
                       for(int i=0;i<4;i++)
-                      CategoriesCard('','العاب',theme.getColor("contentColor"),'',theme.getColor("iconsColor")),
+                        CategoriesCard('','العاب',theme.getColor("contentColor"),'',theme.getColor("iconsColor"),i),
 
-                    ]),
+                      ],
+                    ),
                   ),
-
-
 
                 ],
               ),
@@ -222,32 +279,36 @@ class Task extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Language language = Language();
     return Container(
-      width: size.getWidth()* 25,
-      height: size.getHeight() * 12,
+      width: size.getWidth()* ((language.language==1)? 25:25.3),
+      height: size.getHeight() * ((language.language==1)? 12:13),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            height: size.getHeight() * 1,
-          ),
+
           Container(
-            height: size.getHeight() * 7,
+            height: size.getHeight() * 6.5,
             child: Image.asset(image),
           ),
-          Expanded(
+
+          Container(
+
             child: Text(Name,
+                textAlign: TextAlign.center,
                 style: TextStyle(
+                    fontSize: size.getWidth()*3.3,
                     color: Color(theme),
                     fontWeight: FontWeight.bold)),
           ),
         ],
       ),
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.all(size.getWidth() * 2),
       decoration:  BoxDecoration(
         color: Color(contentColor),
 
         //  Image.network("https://media-exp1.licdn.com/dms/image/C5609AQFiZwbE2r33SQ/company-featured_1128_635/0/1529503144539?e=2147483647&v=beta&t=HC9Q0DGqS9NNkhsRwJXWmBczlCcWqXJHHSIeWvwcJks",),
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: BorderRadius.all(Radius.circular(size.getWidth()*4.3)),
       ),
 
     );
@@ -263,40 +324,57 @@ class CategoriesCard extends StatelessWidget {
   var color;
   var id;
   var contentColor;
-  CategoriesCard(this.photo, this.Title, this.color, this.id,this.contentColor);
+  var index;
+  CategoriesCard(this.photo, this.Title, this.color, this.id,this.contentColor,this.index);
 
   @override
   Widget build(BuildContext context) {
     var size = mediaQuery(context);
+    Language language = Language();
     return InkWell(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         child: Container(
-          width: size.getWidth()* 25,
-          height: size.getHeight() * 12,
-          margin:  EdgeInsets.symmetric(horizontal: size.getWidth()*2),
-          decoration: BoxDecoration(
-            color: Color(color),
-            borderRadius: BorderRadius.circular(10),
-          ),
+          width: size.getWidth()* ((language.language==1)? 25:25.3),
+          height: size.getHeight() * ((language.language==1)? 12:13),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-               SizedBox(height: size.getHeight()*1),
+
               Container(
-                  height: size.getHeight()*6,
-                  width: size.getWidth()*15,
-                  child: Image.network('https://www.pngkey.com/png/full/12-126560_game-icons-png-game-icon-png.png')),
-               SizedBox(height: size.getHeight()*1),
-              Text(Title,
-                  style:  TextStyle(
-                    color: Color(contentColor),
-                    fontWeight: FontWeight.bold,
-                  )),
+                height: size.getHeight() * 6.5,
+                child: Image.asset("assets/tasks/play.png"),
+              ),
+
+              Container(
+
+                child: Text(Title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: size.getWidth()*3.3,
+                        color: Color(contentColor),
+                        fontWeight: FontWeight.bold)),
+              ),
             ],
           ),
+          margin: EdgeInsets.all(size.getWidth() * 2),
+          decoration:  BoxDecoration(
+            color: Color(color),
+
+            //  Image.network("https://media-exp1.licdn.com/dms/image/C5609AQFiZwbE2r33SQ/company-featured_1128_635/0/1529503144539?e=2147483647&v=beta&t=HC9Q0DGqS9NNkhsRwJXWmBczlCcWqXJHHSIeWvwcJks",),
+            borderRadius: BorderRadius.all(Radius.circular(size.getWidth()*4.3)),
+          ),
+
         ),
         onTap: () {
 
+          if(0==index){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  entertainment()),
+            );
+          }
+         print(index);
         });
   }
 }

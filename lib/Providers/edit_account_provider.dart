@@ -12,7 +12,7 @@ class edit_account_provider extends ChangeNotifier{
 
  GoogleMapController? mapController;
  Set<Marker> markers = Set();
-
+late double hueColor;
 
  LatLng carLocation = LatLng(36.250593, 44.066832);
  addMarkers() async {
@@ -28,17 +28,22 @@ class edit_account_provider extends ChangeNotifier{
       .buffer
       .asUint8List();
 
+  double hueColor;
+
+  hueColor = BitmapDescriptor.hueRed;
 
 
   markers.add(
    Marker( //add start location marker
+    icon: BitmapDescriptor.defaultMarkerWithHue(hueColor),
     markerId: MarkerId(carLocation.toString()),
     position: carLocation, //position of marker
-    infoWindow: InfoWindow( //popup info
+    infoWindow: InfoWindow(
      title: 'Car Point ',
      snippet: 'Car Marker',
     ),
-    icon: BitmapDescriptor.fromBytes(bytes), //Icon for Marker
+ //   icon: BitmapDescriptor.fromBytes(bytes),
+    //Icon for Marker
    ),
   );
   notifyListeners();

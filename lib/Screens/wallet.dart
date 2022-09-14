@@ -1,8 +1,10 @@
 import 'package:alaimtidad/Constants/language.dart';
+import 'package:alaimtidad/Screens/reports.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Constants/size.dart';
 import '../Constants/theme.dart';
+import 'notifications.dart';
 
 class wallet extends StatefulWidget {
   const wallet({Key? key}) : super(key: key);
@@ -39,9 +41,17 @@ class _walletState extends State<wallet> {
                     Center(
                       child:Text(language.GetWord("Wallet"),style: TextStyle(fontWeight: FontWeight.bold,color: Color(theme.getColor("iconsColor"))),),
                     ),
-                    Container(
-                      child:Icon(Icons.notification_important_sharp,size: size.getWidth()*8,color: Color(theme.getColor("iconsColor"))),
-                      width: size.getWidth()*13,
+                    InkWell(
+                      child: Container(
+                        child:Icon(Icons.notification_important_sharp,size: size.getWidth()*8,color: Color(theme.getColor("iconsColor"))),
+                        width: size.getWidth()*13,
+                      ),
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => notifications()),
+                        );
+                      },
                     ),
 
 
@@ -82,7 +92,7 @@ class _walletState extends State<wallet> {
                       ),
                       Container(
                         width: size.getWidth() * 10,
-                        height: size.getHeight() * 5,
+                        height: size.getWidth() * 10,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: Color(theme.getColor("arrow_forward_ios_rounded")),
@@ -112,10 +122,34 @@ class _walletState extends State<wallet> {
                   ),
                 ),
                 SizedBox(height: size.getHeight()*2,),
+
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: size.getWidth()*2,),
-                    Text(language.GetWord("Recent transactions"),style: TextStyle(fontWeight: FontWeight.bold, color: Color(theme.getColor("iconsColor")),),),
+
+                   Row(
+                     children: [
+                       SizedBox(width: size.getWidth()*4,),
+                       Text(language.GetWord("Recent transactions"),style: TextStyle(fontWeight: FontWeight.bold, color: Color(theme.getColor("iconsColor")),),),
+                     ],
+                   ),
+                    InkWell(
+                      child: Container(
+                          width: size.getWidth() * 13,
+                          child: Text(
+                            language.GetWord("More"),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(theme.getColor("iconsColor")),
+                            ),
+                          )),
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => reports()),
+                        );
+                      },
+                    ),
                   ],
                 ),
 

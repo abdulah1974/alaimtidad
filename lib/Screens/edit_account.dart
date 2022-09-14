@@ -30,6 +30,7 @@ class _edit_accountState extends State<edit_account> {
     return Scaffold(
       backgroundColor: Color(theme.getColor("backgrouund")),
       appBar: AppBar(
+        elevation:0,
         leading: InkWell(
           child: Icon(Icons.arrow_back,color: Color(theme.getColor("iconsColor")),),
           onTap: () {
@@ -48,7 +49,6 @@ class _edit_accountState extends State<edit_account> {
           Center(
             child:Container(
               decoration:BoxDecoration(
-                // borderRadius: BorderRadius.circular(size.getWidth() * 50),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -64,7 +64,7 @@ class _edit_accountState extends State<edit_account> {
                 BorderRadius.circular(size.getWidth() * 50),
                 child: Image.network(
                   "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-                  height: size.getHeight() * 13,
+                  height: size.getWidth() * 28,
                   width: size.getWidth() * 28,
                   fit: BoxFit.cover,
                 ),
@@ -81,7 +81,7 @@ class _edit_accountState extends State<edit_account> {
                 width: size.getWidth() * 6,
 
               ),
-              const Text("Name", style: TextStyle(color: Colors.white,)),
+               Text("Name", style: TextStyle(color: Color(theme.getColor("iconsColor")),)),
             ],
           ),
           Consumer<edit_account_provider>(
@@ -95,7 +95,7 @@ class _edit_accountState extends State<edit_account> {
                     width: size.getWidth() *90,
 
                     decoration: BoxDecoration(
-                      color: Colors.white38,
+                      color: Color(theme.getColor("contentColor")),
                       borderRadius: BorderRadius.circular(size.getWidth() * 3),
                     ),
                     child:Row(
@@ -103,7 +103,7 @@ class _edit_accountState extends State<edit_account> {
                         SizedBox(
                           width: size.getWidth() * 2,
                         ),
-                        Text(value.name, style: TextStyle(color: Colors.white,)),
+                        Text(value.name, style: TextStyle(color: Color(theme.getColor("iconsColor")),)),
                       ],
                     ),
                   ),
@@ -119,7 +119,7 @@ class _edit_accountState extends State<edit_account> {
                 width: size.getWidth() * 6,
 
               ),
-            const  Text("Email", style: TextStyle(color: Colors.white,)),
+              Text("Email", style: TextStyle(    color: Color(theme.getColor("iconsColor")),)),
             ],
           ),
           Consumer<edit_account_provider>(
@@ -133,7 +133,7 @@ class _edit_accountState extends State<edit_account> {
                     width: size.getWidth() *90,
 
                     decoration: BoxDecoration(
-                      color: Colors.white38,
+                      color: Color(theme.getColor("contentColor")),
                       borderRadius: BorderRadius.circular(size.getWidth() * 3),
                     ),
                     child:Row(
@@ -141,7 +141,7 @@ class _edit_accountState extends State<edit_account> {
                         SizedBox(
                           width: size.getWidth() * 2,
                         ),
-                        Text(value.email, style: TextStyle(color: Colors.white,)),
+                        Text(value.email, style: TextStyle(color: Color(theme.getColor("iconsColor")),)),
                       ],
                     ),
                   ),
@@ -156,7 +156,7 @@ class _edit_accountState extends State<edit_account> {
                 width: size.getWidth() * 6,
 
               ),
-              const  Text("Mobile", style: TextStyle(color: Colors.white,)),
+                Text("Mobile", style: TextStyle(color: Color(theme.getColor("iconsColor")),)),
             ],
           ),
           Consumer<edit_account_provider>(
@@ -170,7 +170,7 @@ class _edit_accountState extends State<edit_account> {
                     width: size.getWidth() *90,
 
                     decoration: BoxDecoration(
-                      color: Colors.white38,
+                      color: Color(theme.getColor("contentColor")),
                       borderRadius: BorderRadius.circular(size.getWidth() * 3),
                     ),
                     child:Row(
@@ -178,7 +178,7 @@ class _edit_accountState extends State<edit_account> {
                         SizedBox(
                           width: size.getWidth() * 2,
                         ),
-                        Text(value.nmber_mobile, style: TextStyle(color: Colors.white,)),
+                        Text(value.nmber_mobile, style: TextStyle(color: Color(theme.getColor("iconsColor")),)),
                       ],
                     ),
                   ),
@@ -193,7 +193,7 @@ class _edit_accountState extends State<edit_account> {
                 width: size.getWidth() * 6,
 
               ),
-              const  Text("Address", style: TextStyle(color: Colors.white,)),
+                Text("Address", style: TextStyle(color: Color(theme.getColor("iconsColor")),)),
             ],
           ),
           Consumer<edit_account_provider>(

@@ -28,7 +28,7 @@ class setting_provider extends ChangeNotifier{
 
    void fingerprint_(){
      fingerprint=!fingerprint;
-     theme.changeTheme();
+
      notifyListeners();
    }
    void language_(){

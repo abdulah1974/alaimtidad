@@ -13,12 +13,16 @@ class Themes extends GetxController {
     "backgrouund": "0xFF000000",
     "contentColor": "0xFF252525",
     "arrow_forward_ios_rounded":"0xFFB0B0B0",
+    "backgrouund_2":"0xFF000000",
+    "entertainment": "0xFF252525",
   };
   Map<String, Object> whiteTheme = {
     "iconsColor": "0xFF000000",
     "backgrouund": "0xFFFFFFFF",
     "contentColor": "0xffcc333",
     "arrow_forward_ios_rounded":"0xFFB0B0B0",
+    "backgrouund_2":"0xFFFFFFFF",
+    "entertainment": "0xFFFFFFFF",
   };
 
   getColor(key) {

@@ -75,6 +75,7 @@ class _connection_typeState extends State<connection_type> {
     return Scaffold(
       backgroundColor: Color(theme.getColor("backgrouund")),
       appBar: AppBar(
+        elevation:0,
         leading: InkWell(
           child: Icon(Icons.arrow_back,color: Color(theme.getColor("iconsColor")),),
           onTap: () {

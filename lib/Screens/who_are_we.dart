@@ -20,6 +20,7 @@ class _who_are_weState extends State<who_are_we> {
     return Scaffold(
       backgroundColor: Color(theme.getColor("backgrouund")),
       appBar: AppBar(
+        elevation:0,
         leading: InkWell(
           child: Icon(Icons.arrow_back,color: Color(theme.getColor("iconsColor")),),
           onTap: () {

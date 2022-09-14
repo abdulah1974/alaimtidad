@@ -12,9 +12,14 @@ class change_password extends StatefulWidget {
 }
 
 class _change_passwordState extends State<change_password> {
-  TextEditingController Old_password = TextEditingController();
+  TextEditingController Old_password = TextEditingController(text: "abdullah_12345");
   TextEditingController New_password = TextEditingController();
   TextEditingController Confirm_the_password = TextEditingController();
+
+  void den(){
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     Language language = Language();
@@ -23,6 +28,7 @@ class _change_passwordState extends State<change_password> {
     return Scaffold(
       backgroundColor: Color(theme.getColor("backgrouund")),
       appBar: AppBar(
+        elevation:0,
         leading: InkWell(
           child: Icon(Icons.arrow_back,color: Color(theme.getColor("iconsColor")),),
           onTap: () {
@@ -42,33 +48,40 @@ class _change_passwordState extends State<change_password> {
               Text(language.GetWord('Change Password'),style:TextStyle(fontSize:size.getWidth()*8,color:Color(theme.getColor("iconsColor"),),),),
 
               Container(
+                height:size.getHeight()*7.5,
                 margin: EdgeInsets.all(size.getWidth()*5),
                 child: TextField(
-                  controller:Old_password,
+                  controller: Old_password,
+                  textAlignVertical: TextAlignVertical.bottom,
+
                   cursorColor:Color(theme.getColor("iconsColor")),
                   style: TextStyle(
+
                     fontWeight: FontWeight.bold,
                     color:Color(theme.getColor("iconsColor")),
                   ),
                   decoration: InputDecoration(
                     hintText:language.GetWord('Old password'),
 
-                    hintStyle: TextStyle(color: Color(theme.getColor("iconsColor"))),
+                    hintStyle: TextStyle(color: Color(theme.getColor("arrow_forward_ios_rounded"))),
 
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(theme.getColor("iconsColor"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
 
                     // borderRadius: BorderRadius.circular(50.0),
 
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(theme.getColor("iconsColor"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(theme.getColor("arrow_forward_ios_rounded"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
 
                   ),
                 ),
               ),
               Container(
+                height:size.getHeight()*7.5,
                 margin: EdgeInsets.all(size.getWidth()*5),
+
                 child: TextField(
                   controller:New_password,
                   cursorColor:Color(theme.getColor("iconsColor")),
+                  textAlignVertical: TextAlignVertical.bottom,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color:Color(theme.getColor("iconsColor")),
@@ -76,20 +89,22 @@ class _change_passwordState extends State<change_password> {
                   decoration: InputDecoration(
                     hintText: language.GetWord("New password"),
 
-                    hintStyle: TextStyle(color: Color(theme.getColor("iconsColor"))),
+                    hintStyle: TextStyle(color: Color(theme.getColor("arrow_forward_ios_rounded"))),
 
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:Color(theme.getColor("iconsColor"))), borderRadius: BorderRadius.circular(size.getWidth()*3),),
 
                     // borderRadius: BorderRadius.circular(50.0),
 
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color:Color(theme.getColor("iconsColor"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color:Color(theme.getColor("arrow_forward_ios_rounded"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
 
                   ),
                 ),
               ),
               Container(
+                height:size.getHeight()*7.5,
                 margin: EdgeInsets.all(size.getWidth()*5),
                 child: TextField(
+                  textAlignVertical: TextAlignVertical.bottom,
                   controller:Confirm_the_password,
                   cursorColor:Color(theme.getColor("iconsColor")),
                   style: TextStyle(
@@ -97,14 +112,14 @@ class _change_passwordState extends State<change_password> {
                     color:Color(theme.getColor("iconsColor")),
                   ),
                   decoration: InputDecoration(
-                    hintText:language.GetWord("Confirm the password"),
-                    hintStyle: TextStyle(color: Color(theme.getColor("iconsColor"))),
 
+                    hintText:language.GetWord("Confirm the password"),
+                    hintStyle: TextStyle(color: Color(theme.getColor("arrow_forward_ios_rounded"))),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide( color: Color(theme.getColor("iconsColor"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
 
                     // borderRadius: BorderRadius.circular(50.0),
 
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide( color: Color(theme.getColor("iconsColor"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide( color: Color(theme.getColor("arrow_forward_ios_rounded"))),borderRadius: BorderRadius.circular(size.getWidth()*3),),
 
                   ),
                 ),
@@ -129,16 +144,17 @@ class _change_passwordState extends State<change_password> {
                               curve: Curves.elasticOut,
                               reverseCurve: Curves.easeOutCubic),
                           child: CustomDialog( // our custom dialog
-                            title: "Password changed successfully",
-                            content:"Do not give your password to anyone",
-                            positiveBtnText: "Done",
+                            title: language.GetWord("Password changed successfully"),
+                            content:language.GetWord("Do not give your password to anyone to protect your information"),
+                            positiveBtnText: language.GetWord("Succeeded"),
                             negativeBtnText: "Cancel",
 
                             positiveBtnPressed: () {
+                              Navigator.of(context).pop();
+                              den();
 
-                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                const  setting()), (Route<dynamic> route) => false);
                             },
+
                           ),
                         );
                       },
@@ -148,7 +164,7 @@ class _change_passwordState extends State<change_password> {
                       },
                     );
                   },
-                  child: Text('Send'),
+                  child: Text(language.GetWord('Send')),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red,
 
@@ -208,10 +224,11 @@ class CustomDialog extends StatelessWidget {
             children: <Widget>[
              Row(
                children: [
-
+              language.language==1?SizedBox(width: size.getWidth()*8):SizedBox(),
                  Text(
                    title,
-                   style: TextStyle(color: Color(theme.getColor("backgrouund")),fontSize: size.getWidth()*4.7),
+                   style: TextStyle(color: Color(theme.getColor("backgrouund")),fontSize: size.getWidth()*4.5,fontWeight: FontWeight.bold,),
+                   textAlign: TextAlign.center,
                  ),
                ],
              ),

@@ -7,6 +7,7 @@ import '../Constants/size.dart';
 import '../Constants/theme.dart';
 import '../Providers/account_provider.dart';
 import 'edit_account.dart';
+import 'notifications.dart';
 
 class account extends StatefulWidget {
   const account({Key? key}) : super(key: key);
@@ -64,14 +65,22 @@ class _accountState extends State<account> {
                               style: TextStyle(fontWeight: FontWeight.bold,   color: Color(theme.getColor("iconsColor")),),
                             ),
                           ),
-                          Container(
-                            child: Icon(
-                              color: Color(theme.getColor("iconsColor")),
-                              Icons.notification_important_sharp,
+                          InkWell(
+                            child: Container(
+                              child: Icon(
+                                color: Color(theme.getColor("iconsColor")),
+                                Icons.notification_important_sharp,
 
-                              size: size.getWidth() * 8,
+                                size: size.getWidth() * 8,
+                              ),
+                              width: size.getWidth() * 12,
                             ),
-                            width: size.getWidth() * 12,
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => notifications()),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -96,7 +105,7 @@ class _accountState extends State<account> {
                               BorderRadius.circular(size.getWidth() * 50),
                           child: Image.network(
                             "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-                            height: size.getHeight() * 13,
+                            height: size.getWidth() * 28,
                             width: size.getWidth() * 28,
                             fit: BoxFit.cover,
                           ),

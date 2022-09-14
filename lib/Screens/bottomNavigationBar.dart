@@ -12,13 +12,22 @@ class bottomNavigationBar extends StatefulWidget {
   State<bottomNavigationBar> createState() => _bottomNavigationBarState();
 }
 
+
+  int bottomNavigationBarIndex = 0;
+
+
 class _bottomNavigationBarState extends State<bottomNavigationBar> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
+
+
+
+  void onItemTapped(int index) {
+
     setState(() {
-      _selectedIndex = index;
+      bottomNavigationBarIndex = index;
+      print("abd");
     });
   }
+
 
 
   static const List<Widget> _widgetOptions = <Widget>[
@@ -32,45 +41,44 @@ class _bottomNavigationBarState extends State<bottomNavigationBar> {
     Themes theme = Themes();
     return Scaffold(
       // appBar: AppBar(),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions[bottomNavigationBarIndex],
+
       bottomNavigationBar: BottomNavigationBar(
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
 
-            icon: _selectedIndex!=0?SvgPicture.asset("assets/icon/Home_notFULL.svg",):SvgPicture.asset("assets/icon/Home.svg",),
+            icon: bottomNavigationBarIndex!=0?SvgPicture.asset("assets/icon/Home_notFULL.svg",):SvgPicture.asset("assets/icon/Home.svg",),
           //  icon: Icon(Icons.home,size: 30,),
             label: '',
 
 
           ),
           BottomNavigationBarItem(
-            icon: _selectedIndex!=1?SvgPicture.asset("assets/icon/Profile.svg",):SvgPicture.asset("assets/icon/Profile_Red.svg",),
+            icon: bottomNavigationBarIndex!=1?SvgPicture.asset("assets/icon/Profile.svg",):SvgPicture.asset("assets/icon/Profile_Red.svg",),
           //  icon: Icon(Icons.account_circle_rounded,size: 30,),
             label: '',
 
           ),
           BottomNavigationBarItem(
-             icon: _selectedIndex!=2?SvgPicture.asset("assets/icon/Wallet.svg",):SvgPicture.asset("assets/icon/Wallet_Red.svg",),
+             icon: bottomNavigationBarIndex!=2?SvgPicture.asset("assets/icon/Wallet.svg",):SvgPicture.asset("assets/icon/Wallet_Red.svg",),
           //  icon: Icon(Icons.card_travel_outlined,size: 30,),
             label:'',
 
           ),
           BottomNavigationBarItem(
-            icon: _selectedIndex!=3?SvgPicture.asset("assets/icon/Setting.svg",):SvgPicture.asset("assets/icon/Setting_Red.svg",),
+            icon: bottomNavigationBarIndex!=3?SvgPicture.asset("assets/icon/Setting.svg",):SvgPicture.asset("assets/icon/Setting_Red.svg",),
          //   icon: Icon(Icons.settings,size: 30,),
             label:'',
 
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: bottomNavigationBarIndex,
         selectedItemColor: Colors.red,
         selectedFontSize: 0,
 
         backgroundColor: Color(theme.getColor("backgrouund")),
         type: BottomNavigationBarType.fixed,
-        onTap: _onItemTapped,
+        onTap: onItemTapped,
       ),
     );
   }
