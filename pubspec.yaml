@@ -51,6 +51,7 @@ dev_dependencies:
       url: https://github.com/AlexHartford/flutter_datetime_picker.git
       ref: master
   fl_chart: ^0.55.1
+  smooth_page_indicator: ^1.0.0+2
   flutter_localizations:
     sdk: flutter
 

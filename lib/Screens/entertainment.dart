@@ -1,10 +1,13 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Constants/language.dart';
 import '../Constants/size.dart';
 import '../Constants/theme.dart';
 import '../Providers/entertainment_provider.dart';
+import 'confirm_buy.dart';
 class entertainment extends StatefulWidget {
   const entertainment({Key? key}) : super(key: key);
 
@@ -13,6 +16,7 @@ class entertainment extends StatefulWidget {
 }
 
 class _entertainmentState extends State<entertainment> {
+
   @override
   Widget build(BuildContext context) {
     var size = mediaQuery(context);
@@ -92,8 +96,9 @@ class _entertainmentState extends State<entertainment> {
 
                         onPressed: () {
 
+                          _showModalSheet(language,theme,);
                         },
-                        child: Text(language.GetWord("Categories")+"20",style: TextStyle(fontSize: 9.8),),
+                        child: Text(language.GetWord("Categories")+" 20",style: TextStyle(fontSize: 9.1),),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blueAccent,
                           shape: RoundedRectangleBorder(
@@ -113,6 +118,122 @@ class _entertainmentState extends State<entertainment> {
     },
 
     ),
+    );
+  }
+
+  void _showModalSheet(language, themes) {
+    List index_=["a","a","a","a","a","a","a","a"];
+    final PageController controller = PageController();
+    var size = mediaQuery(context);
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return Consumer<entertainment_provider>(
+            builder: (BuildContext context, value, Widget? child) {
+              return   Container(
+                height: size.getHeight() * 50,
+                child: Column(
+                  children: [
+                    SizedBox(height: size.getHeight()*1.2),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(size.getWidth() *5),
+                        color: Color(themes.getColor("iconsColor")),
+                      ),
+                      width: size.getWidth() * 15,
+                      height: size.getHeight() * 0.8,
+                    ),
+                    SizedBox(height: size.getHeight()*1.2),
+
+                    Text("Netflix",style: TextStyle(color: Color(themes.getColor("iconsColor")),fontWeight: FontWeight.bold),),
+                    Container(
+                      height: size.getHeight() * 30,
+                      child: PageView.builder(
+                        itemCount: index_.length,
+                        controller: controller,
+                        itemBuilder: (context, index) {
+
+
+                          return  Column(
+                            children: [
+                              SizedBox(height: size.getHeight() * 2),
+                          GestureDetector(
+                            child: Container(
+                               height: size.getHeight() * 28,
+                                width: size.getWidth() * 90,
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(size.getHeight() * 2),
+                                child: Image.network(
+                                  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+                                  //width: 500,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+
+                            },
+                          ),
+                        ],
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: size.getHeight()*1.5),
+                    1>0?Text(language.GetWord("Unavailable"),style: TextStyle(color: Color(themes.getColor("iconsColor")),)):Text("10000",style: TextStyle(color: Color(themes.getColor("iconsColor")),)),
+                Expanded(
+                  child: SmoothPageIndicator(
+                      effect:  SlideEffect(
+
+                          dotWidth:  10.0,
+                          dotHeight:  10.0,
+                         // dotColor:  Color(),
+                          activeDotColor:  Colors.redAccent,
+                      ),
+                      controller: controller, // PageController
+                      count: index_.length,
+
+                    //  textDirection: TextDirection.ltr,
+                  ),
+                ),
+
+                    Container(
+                      height: size.getHeight()*5,
+                      width: size.getWidth()*90,
+                      child: ElevatedButton(
+
+                        onPressed: () {
+
+                         Navigator.of(context).pop();
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(builder: (context) =>  confirm_buy()),
+                         );
+                        },
+                        child: Text(language.GetWord("Confirm Buy"),),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blueAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(size.getHeight()*1),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.getHeight()*1.4),
+                  ],
+                ),
+              );
+            });
+      },
+      elevation: 20.0,
+      enableDrag: true,
+      backgroundColor: Color(themes.getColor("entertainment")),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          )),
     );
   }
 }

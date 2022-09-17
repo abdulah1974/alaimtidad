@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
                           onTap: (){
                             setState(() {
 
-                              bottomNavigationBarIndex= 2;
+                           //   bottomNavigationBarIndex= 2;
                             });
                           },
                           child: Container(
@@ -125,135 +125,137 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   SizedBox(height: size.getHeight() * 2),
-                  Container(
-                    margin: EdgeInsets.all(size.getHeight() * 2),
-                    child: CarouselSlider.builder(
-                      itemCount: 10,
-                      options: CarouselOptions(
-                        enlargeCenterPage: true,
-                        height: size.getHeight() * 23,
-                        autoPlay: false,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        reverse: false,
-                        //aspectRatio: 5.0,
-                      ),
-                      itemBuilder: (context, i, id) {
-                        //for onTap to redirect to another screen
-                        return GestureDetector(
-                          child: Container(
-                            //ClipRRect for image border radius
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.circular(size.getHeight() * 2),
-                              child: Image.network(
-                                "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-                                //width: 500,
-                                fit:BoxFit.cover,
-                              ),
-                            ),
+
+                  Consumer<home_provider>(
+                    builder: (BuildContext context, value, Widget? child) {
+                      return  Container(
+                        margin: EdgeInsets.all(size.getHeight() * 2),
+                        child: CarouselSlider.builder(
+                          itemCount: value.advertisement.length,
+                          options: CarouselOptions(
+                            enlargeCenterPage: true,
+                            height: size.getHeight() * 23,
+                            autoPlay: false,
+                            autoPlayInterval: const Duration(seconds: 3),
+                            reverse: false,
+                            //aspectRatio: 5.0,
                           ),
-                          onTap: () {
-                            // value.sss();
+                          itemBuilder: (context, i, id) {
+                            //for onTap to redirect to another screen
+                            return GestureDetector(
+                              child: Container(
+                                //ClipRRect for image border radius
+                                child: ClipRRect(
+                                  borderRadius:
+                                  BorderRadius.circular(size.getHeight() * 2),
+                                  child: Image.network(
+                                    value.advertisement[i],
+                                    //width: 500,
+                                    fit:BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                // value.sss();
+                              },
+                            );
                           },
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    }
+
                   ),
 
                   Row(
-
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: size.getWidth() * 2,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: size.getWidth() * 4),
+                        child: Text(
+                          language.GetWord("Mission"),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(theme.getColor("iconsColor")),
+                          ),
+                        ),
                       ),
-                       Text(
-                        language.GetWord("Mission"),
-                        style: TextStyle(fontWeight: FontWeight.bold,color: Color(theme.getColor("iconsColor")),),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: size.getWidth() * 4),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => tasks()),
+                              );
+                            },
+                            child: Text(language.GetWord("More"),
+                                style: TextStyle(
+                                  color: Color(theme.getColor("iconsColor")),
+                                ))),
                       ),
-                      SizedBox(
-                        width: size.getWidth() * 73,
-                      ),
-                      InkWell(
-                         onTap: () {
-                           Navigator.push(
-                             context,
-                             MaterialPageRoute(builder: (context) =>  tasks()),
-                           );
-                         },
-                          child: Expanded(
-                              child: Text(language.GetWord("More"),
-                                  style: TextStyle(
-                                    color: Color(theme.getColor("iconsColor")),
-                                  )))),
                     ],
                   ),
                   SizedBox(height: size.getHeight() * 2),
-                  SingleChildScrollView(
+                  Container(
+                    width: size.getWidth()*100,
+                    height: size.getHeight() * ((language.language==1)? 14.4:15.4),
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                    child: Row(children: [
-                      for (var index = 0; index < value.Task.length; index++)
-                           InkWell(
-                             onTap: (){
+                      itemCount: value.Task.length,
 
-                               if(0==index){
-                                 Navigator.push(
-                                   context,
-                                   MaterialPageRoute(builder: (context) =>  categories()),
-                                 );
-                               }
-                               if(1==index){
-                                 Navigator.push(
-                                   context,
-                                   MaterialPageRoute(builder: (context) =>  reports()),
-                                 );
-                               }
-                               if(2==index){
-                                 Navigator.push(
-                                   context,
-                                   MaterialPageRoute(builder: (context) =>  balance_transfer()),
-                                 );
-                               }
-                               if(3==index){
-                                 Navigator.push(
-                                   context,
-                                   MaterialPageRoute(builder: (context) =>  device_filling()),
-                                 );
-                               }
-                             },
-                             child:language.language==1?Task(value.Task[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor")):Task(value.Task_en[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor")),
-                           ),
+                      itemBuilder: (context, index) {
 
-                        ]),
+                        return language.language==1?Task(value.Task[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor"),index):Task(value.Task_en[index][1], value.Task[index][0], size,theme.getColor("iconsColor"),theme.getColor("contentColor"),index);
+                      },
+                    ),
                   ),
                   SizedBox(height: size.getHeight() * 2),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: size.getWidth() * 2,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: size.getWidth() * 4),
+                        child: Text(
+                          language.GetWord("Categories"),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(theme.getColor("iconsColor")),
+                          ),
+                        ),
                       ),
-                       Text(
-                        language.GetWord("Categories"),
-                        style: TextStyle(fontWeight: FontWeight.bold,color: Color(theme.getColor("iconsColor")),),
-                      ),
-                      SizedBox(
-                        width: size.getWidth() * 66,
-                      ),
-                      Expanded(child: Text(language.GetWord("More"), style: TextStyle(color: Color(theme.getColor("iconsColor")),))),
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: size.getWidth() * 4),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  categories()),
+                              );
+                            },
+                            child: Text(language.GetWord("More"),
+                                style: TextStyle(
+                                  color: Color(theme.getColor("iconsColor")),
+                                )),
+                          )),
                     ],
                   ),
                   SizedBox(
                     height: size.getHeight() * 2,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(children: [
+                  Container(
+                    width: size.getWidth()*100,
+                    height: size.getHeight() * ((language.language==1)? 14.4:15.4),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: value.Task.length,
 
-                      for(int i=0;i<4;i++)
-                        CategoriesCard('','العاب',theme.getColor("contentColor"),'',theme.getColor("iconsColor"),i),
+                      itemBuilder: (context, index) {
 
-                      ],
+                        return  CategoriesCard('','العاب',theme.getColor("contentColor"),'',theme.getColor("iconsColor"),index);
+                      },
                     ),
                   ),
+
 
                 ],
               ),
@@ -275,42 +277,73 @@ class Task extends StatelessWidget {
   var image ;
   var theme;
   var contentColor;
-  Task(this.Name , this.image , this.size,this.theme,this.contentColor);
+  var index;
+  Task(this.Name , this.image , this.size,this.theme,this.contentColor,this.index);
 
   @override
   Widget build(BuildContext context) {
     Language language = Language();
-    return Container(
-      width: size.getWidth()* ((language.language==1)? 25:25.3),
-      height: size.getHeight() * ((language.language==1)? 12:13),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
+    return InkWell(
+      onTap: (){
 
-          Container(
-            height: size.getHeight() * 6.5,
-            child: Image.asset(image),
-          ),
+        if(0==index){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  categories()),
+          );
+        }
+        if(1==index){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  reports()),
+          );
+        }
+        if(2==index){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  balance_transfer()),
+          );
+        }
+        if(3==index){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  device_filling()),
+          );
+        }
+        print(";;");
+      },
+      child: Container(
+        width: size.getWidth()* ((language.language==1)? 25:25.3),
+        height: size.getHeight() * ((language.language==1)? 12:13),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
 
-          Container(
+            Container(
+              height: size.getHeight() * 6.5,
+              child: Image.asset(image),
+            ),
 
-            child: Text(Name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: size.getWidth()*3.3,
-                    color: Color(theme),
-                    fontWeight: FontWeight.bold)),
-          ),
-        ],
+            Container(
+
+              child: Text(Name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: size.getWidth()*3.3,
+                      color: Color(theme),
+                      fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+        margin: EdgeInsets.all(size.getWidth() * 2),
+        decoration:  BoxDecoration(
+          color: Color(contentColor),
+
+          //  Image.network("https://media-exp1.licdn.com/dms/image/C5609AQFiZwbE2r33SQ/company-featured_1128_635/0/1529503144539?e=2147483647&v=beta&t=HC9Q0DGqS9NNkhsRwJXWmBczlCcWqXJHHSIeWvwcJks",),
+          borderRadius: BorderRadius.all(Radius.circular(size.getWidth()*4.3)),
+        ),
+
       ),
-      margin: EdgeInsets.all(size.getWidth() * 2),
-      decoration:  BoxDecoration(
-        color: Color(contentColor),
-
-        //  Image.network("https://media-exp1.licdn.com/dms/image/C5609AQFiZwbE2r33SQ/company-featured_1128_635/0/1529503144539?e=2147483647&v=beta&t=HC9Q0DGqS9NNkhsRwJXWmBczlCcWqXJHHSIeWvwcJks",),
-        borderRadius: BorderRadius.all(Radius.circular(size.getWidth()*4.3)),
-      ),
-
     );
   }
 }
@@ -368,13 +401,12 @@ class CategoriesCard extends StatelessWidget {
         ),
         onTap: () {
 
-          if(0==index){
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) =>  entertainment()),
             );
-          }
-         print(index);
+
+       //  print(index);
         });
   }
 }

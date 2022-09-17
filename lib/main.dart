@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'Providers/categories_provider.dart';
+import 'Providers/confirm_buy_provider.dart';
 import 'Providers/edit_account_provider.dart';
 import 'Providers/entertainment_provider.dart';
 import 'Providers/notifications_provider.dart';
@@ -31,6 +32,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => tasks_provider()),
         ChangeNotifierProvider(create: (_) => categories_provider()),
         ChangeNotifierProvider(create: (_) => entertainment_provider()),
+        ChangeNotifierProvider(create: (_) => confirm_buy_provider()),
       ],
       child: MyApp(),
     ),

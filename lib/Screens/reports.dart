@@ -52,6 +52,7 @@ class _reportsState extends State<reports> {
               child: NotificationListener<ScrollUpdateNotification>(
 
                 child: SingleChildScrollView(
+
                   child: Consumer<reports_provider>(
                     builder: (BuildContext context, value, Widget? child) {
                       return Column(
@@ -124,6 +125,7 @@ class _reportsState extends State<reports> {
                                 height: size.getHeight()*5,
                                 width: size.getWidth()*94,
                                 child: ListView.builder(
+
                                     scrollDirection: Axis.horizontal,
                                     itemCount: value.days_ar.length,
                                     itemBuilder:(_,index){
@@ -255,30 +257,24 @@ class _reportsState extends State<reports> {
                 ),
 
               ),
-
               onNotification: (ScrollNotification notification) {
-                setState(() {
 
-                  //  message = "Scroll End";
+                if (notification is UserScrollNotification) {
+                  if (notification.direction == ScrollDirection.forward) {
+                    print("up");
+                    value.show_button();
 
-                  if (notification is UserScrollNotification) {
-                    if (notification.direction == ScrollDirection.forward) {
-                      print("up");
-                      value.show_button();
+                  } else if (notification.direction == ScrollDirection.reverse) {
+                    value.hint_button_();
+                    print("down");
 
-                    } else if (notification.direction == ScrollDirection.reverse) {
-                      value.hint_button_();
-                      print("down");
-
-                    }
                   }
-
-
-                });
+                }
                 return true;
               },
 
             );
+
           },
 
         ),
@@ -602,6 +598,7 @@ class last_transaction extends StatelessWidget {
 
       ],
     );
+
   }
 
 }

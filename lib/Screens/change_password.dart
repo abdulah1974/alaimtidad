@@ -242,17 +242,26 @@ class CustomDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               ButtonBar(
-              ///  buttonMinWidth: 100,
+                children: [
 
-                children: <Widget>[
+                  Container(
 
-                  FlatButton(
-                    child: Text(positiveBtnText,style: TextStyle(color: Colors.red,fontSize: size.getHeight()*2)),
-                    onPressed: positiveBtnPressed,
+                    //    margin: EdgeInsets.all(size.getWidth()*70),
+                    child:ElevatedButton(
 
+                      onPressed: positiveBtnPressed,
+                      child: Text(positiveBtnText),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(size.getHeight()*1),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
-              ),
+              )
             ],
           ),
         ),

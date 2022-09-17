@@ -49,7 +49,19 @@ class Language {
     "Password changed successfully":"Password changed successfully",
     "Do not give your password to anyone to protect your information":"Do not give your password to anyone to protect your information",
     "Succeeded":"Succeeded",
-    "Entertainment":"Entertainment"
+    "Entertainment":"Entertainment",
+    "Unavailable":"Unavailable",
+    "Confirm Buy":"Confirm Buy",
+    "Complete the purchase confirmation process":"Complete the purchase confirmation process",
+    "Order Summary":"Order Summary",
+    "Price":"Price",
+    "Card selling price":"Selling Price",
+    "Product":"Product",
+    "Confirm":"Confirm",
+    "Amount":"Amount",
+    "Amount money required":"Amount money required",
+    "Current Balance":"Current Balance",
+    "Your buy has been successfully completed":"Your buy has been successfully completed",
   };
   final ArWords = {
     "Recent transactions": "المعاملات الاخيره",
@@ -99,7 +111,19 @@ class Language {
     "Password changed successfully":"تم تغيير الرقم السري بنجاح",
     "Do not give your password to anyone to protect your information":"لا تعطِ كلمة مرورك لأي شخص لحماية معلوماتك",
     "Succeeded":"نجح",
-    "Entertainment":"وسائل الترفيه"
+    "Entertainment":"وسائل الترفيه",
+    "Unavailable":"غير متوفره",
+    "Confirm Buy":"تأكيد الشراء",
+    "Complete the purchase confirmation process":"اكمال عملية تأكيد الشراء",
+    "Order Summary":"ملخص الطلب",
+    "Price":"السعر",
+    "Card selling price":"سعر البيع",
+    "Product":"منتج",
+    "Confirm":"يتأكد",
+      "Amount":"العدد",
+    "Amount money required":"المبلغ المالي المطلوب",
+    "Current Balance":"الرصيد الحالي",
+    "Your buy has been successfully completed":"تم الشراء بنجاح"
 
   };
   final storage = GetStorage();
